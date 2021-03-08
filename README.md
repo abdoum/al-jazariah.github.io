@@ -4,4 +4,4 @@
 
 </div>
 
-This project is for learning and memorizing this poem for quran students.
+This free and open source project is for learning and memorizing this poem for quran students.
