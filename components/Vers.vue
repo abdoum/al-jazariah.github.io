@@ -1,47 +1,47 @@
 <template>
-  <div>
+  <div class="">
     <div
-      class="flex flex-col"
+      class="grid grid-cols-2 place-content-center"
       v-for="(c, i) in chapters"
       :key="i"
     >
-      <div class="m-auto">
+      <div class="col-span-2">
         <h1
-          class="font-body text-center title text-3xl text-gray-700 sm:text-5xl py-10 print:pt-0"
+          class="font-body text-center title text-3xl text-gray-700 sm:text-5xl py-10 pb-20 print:pt-0"
           :data-starttime="c.startTime"
         >
           {{ c.content }}
         </h1>
       </div>
-      <div
-        v-for="v in c.vers"
-        :key="v.id"
-        class="vers font-body cursor-pointer m-auto mx-4 sm:mx-48 grid grid-cols-2 gap-10 sm:gap-20 py-3 transition duration-150 ease-in-out transform hover:-translate-y-1 hover:scale-105 active:scale-110  focus:-translate-y-1"
-        :class="{
-          'scale-105': v.id === currentLine.id
-        }"
-      >
-        <div
-          :class="{
-            'text-blue-600':
-              v.id === currentLine.id && currentTimecode < secondHalfStartTime,
-            ...versTdClasses
-          }"
-          class="text-xl -ml-32 sm:-ml-40 xs:whitespace-no-wrap"
-          :data-startTime="v.startTime"
-          v-html="v.content.split('-')[0]"
-          :data-start="v.startTime"
-        ></div>
-        <div
-          :class="{
-            'text-blue-600':
-              v.id === currentLine.id && currentTimecode > secondHalfStartTime,
-            ...versTdClasses
-          }"
-          class="text-xl pt-20 -mr-32 sm:-mr-48 whitespace-pre-wrap sm:whitespace-normal"
-          v-html="v.content.split('-')[1]"
-          :data-start="v.startTime"
-        ></div>
+      <div class="col-span-2 space-y-4  mx-auto">
+          <div
+            v-for="v in c.vers"
+            :key="v.id"
+            class="vers font-body cursor-pointer transition duration-150 ease-in-out transform hover:-translate-y-1 hover:scale-105 active:scale-110 focus:-translate-y-1"
+            :class="{
+              'scale-105': v.id === currentLine.id
+            }"
+          >
+            <div
+              :class="{
+                'text-blue-600':
+                  v.id === currentLine.id && currentTimecode < secondHalfStartTime,
+                ...versTdClasses
+              }"
+              :data-startTime="v.startTime"
+              v-html="v.content.split('-')[0]"
+              :data-start="v.startTime"
+            ></div>
+            <div
+              :class="{
+                'text-blue-600':
+                  v.id === currentLine.id && currentTimecode > secondHalfStartTime,
+                ...versTdClasses
+              }"
+              v-html="v.content.split('-')[1]"
+              :data-start="v.startTime"
+            ></div>
+          </div>
       </div>
     </div>
     <PlaybackControl class="d-print-none" :time="userTimeRequest" />
@@ -81,8 +81,8 @@ export default {
     return {
       versTdClasses: {
         "text-gray-900": true,
-        "sm:text-2xl": true,
-        "text-xs": true,
+        "sm:text-3xl": true,
+        "text-lg": true,
         "text-justify": true,
         // "sm:leading-10": true,
         // "leading-1": true,
@@ -105,10 +105,11 @@ export default {
 .red {
   color: #840032;
 }
-div + .vers > div::after {
+.vers > div::after {
   content: "";
   display: inline-block;
   width: 100%;
+  height: 2rem;
 }
 @media print {
   .d-print-none {

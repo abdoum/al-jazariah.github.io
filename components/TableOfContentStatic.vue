@@ -1,9 +1,9 @@
 <template>
   <div
-    class="bg-gradient-to-r from-green-100 to-teal-100 p-10 grid grid-cols-1  leading-loose place-items-center"
+    class="bg-gradient-to-r from-green-100 to-teal-100 p-10 grid grid-cols-1  leading-loose place-items-center h-screen"
   >
     <div
-      class="font-serif text-center transform duration-200 ease-out transition"
+      class="font-body text-center transform duration-200 ease-out transition"
       v-for="(p, i) in chapters"
       :key="i"
     >
@@ -11,8 +11,8 @@
         :to="'/' + p.id"
         class=" text-xl md:text-3xl text-green-900 hover:underline font-light"
         no-prefetch
-        >{{ Intl.NumberFormat("ar-SA").format(i + 1) }} -
-        {{ p.content }}</nuxt-link
+        ><span class="text-orange-700">{{ Intl.NumberFormat("ar-SA").format(i + 1) }} -</span>
+        {{ p.content }}</nuxt-link 
       >
     </div>
   </div>
