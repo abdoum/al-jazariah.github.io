@@ -1,7 +1,7 @@
 <template>
   <svg
     xmlns="http://www.w3.org/2000/svg"
-    width="30"
+    width="24"
     fill="none"
     viewBox="0 0 24 24"
     stroke="currentColor"
@@ -16,14 +16,14 @@
 </template>
 
 <script>
-export default {
-  props: {
-    ifLoop: {
-      type: Boolean,
-      default: false
+  export default {
+    props: {
+      ifLoop: {
+        type: Boolean,
+        default: false
+      }
     }
-  }
-};
+  };
 </script>
 
 <style></style>

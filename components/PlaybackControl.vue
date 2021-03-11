@@ -6,10 +6,10 @@
           class="rounded-md text-gray-600 flex text-2xl font-extrabold focus:outline-none"
           v-for="(e, i) in controls"
           :key="i"
+          v-show="e.ifShow"
         >
           <button
             type="button"
-            v-show="e.ifShow"
             :class="e.classes"
             @click="e.onclick"
             :disabled="e.disabled"
