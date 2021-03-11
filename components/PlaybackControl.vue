@@ -1,7 +1,7 @@
 <template>
   <div class="fixed sm:right-0 w-full bottom-0 sm:w-auto">
     <div class="rounded-tl-xl bg-gray-200 p-4">
-      <div class="flex sm:flex-col sm:space-y-4 justify-between">
+      <div class="flex sm:flex-col sm:space-y-4 justify-around">
         <div
           class="rounded-md text-gray-600 flex text-2xl font-extrabold focus:outline-none"
           v-for="(e, i) in controls"
