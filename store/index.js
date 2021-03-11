@@ -15,6 +15,7 @@ export const state = () => ({
   currentLoopVersCount: 1,
   playbackRates: [0.75, 1, 1.25, 1.5, 1.75, 2],
   playbackRate: 1,
+  canPlay: false,
   sound: true,
   index: null
 });
@@ -43,6 +44,9 @@ export const mutations = {
   },
   [mutationTypes.UPDATE_PLAYBACK](state, payload) {
     state.playback = payload;
+  },
+  [mutationTypes.UPDATE_CAN_PLAY](state, payload) {
+    state.canPlay = payload;
   },
   [mutationTypes.UPDATE_CURRENT_LOOP_VERS_COUNT](state, payload) {
     if (payload) {
@@ -173,6 +177,9 @@ export const getters = {
   },
   index: state => {
     return state.index;
+  },
+  canPlay: state => {
+    return state.canPlay;
   },
   anchors: state => {
     let sections;
