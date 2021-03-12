@@ -2,13 +2,16 @@
   <div class="">
     <Video :time="userTimeRequest" />
     <Vers
-      :chapters="displayedChapter"
+      :chapter="displayedChapter"
       :currentLine="currentLine"
       :currentTimecode="currentTimecode"
       :secondHalfStartTime="secondHalfStartTime"
       :userTimeRequest="userTimeRequest"
       v-touch:swipe="onSwipe"
     />
+    <Drawer :chapters="chapters" />
+    <DefinitionPanel />
+    <PlaybackControl class="d-print-none" :time="userTimeRequest" />
     <div
       ref="left"
       class="absolute left-50 top-0
@@ -69,9 +72,8 @@
           id: currentID
         })
         .fetch();
-
       return {
-        displayedChapter,
+        displayedChapter: displayedChapter[0],
         poeme
       };
     },

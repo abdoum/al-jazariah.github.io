@@ -1,23 +1,17 @@
 <template>
-  <div
-    class="min-h-screen"
-  >
-    <div
-      class="grid grid-cols-2 place-content-center"
-      v-for="(c, i) in chapters"
-      :key="i"
-    >
+  <div class="min-h-screen">
+    <div class="grid grid-cols-2 place-content-center">
       <div class="col-span-2">
         <h1
           class="font-body text-center title text-3xl text-gray-700 sm:text-5xl py-10 pb-20 print:pt-0"
-          :data-starttime="c.startTime"
+          :data-starttime="chapter.startTime"
         >
-          {{ c.content }}
+          {{ chapter.content }}
         </h1>
       </div>
-      <div class="col-span-2 space-y-4  mx-auto">
+      <div class="col-span-2 space-y-4 mx-16 sm:mx-32 md:mx-auto">
         <div
-          v-for="v in c.vers"
+          v-for="v in chapter.vers"
           :key="v.id"
           class="vers font-body cursor-pointer transition duration-150 ease-in-out transform hover:-translate-y-1 hover:scale-105 active:scale-110 focus:-translate-y-1"
           :class="{
@@ -36,6 +30,7 @@
             :data-start="v.startTime"
             @click="UPDATE_USER_TIME_REQUEST(v.startTime)"
             v-touch:longtap="longtapHandler"
+            :data-start-time="v.startTime"
           ></div>
           <div
             :class="{
@@ -50,7 +45,7 @@
         </div>
       </div>
     </div>
-    <PlaybackControl class="d-print-none" :time="userTimeRequest" />
+
   </div>
 </template>
 
@@ -58,8 +53,8 @@
   import { mapMutations } from 'vuex';
   export default {
     props: {
-      chapters: {
-        type: Array,
+      chapter: {
+        type: Object,
         default: null,
         required: true
       },
@@ -105,17 +100,22 @@
           poeme: true
         },
         swipeLeft: false,
-        swipeRight: false,
+        swipeRight: false
       };
     },
     methods: {
       ...mapMutations(['UPDATE_USER_TIME_REQUEST']),
-    /*   longtapHandler() {
-        console.log('long tap');
+      longtapHandler($event) {
+        const startTime = parseFloat(
+          $event.target.getAttribute('data-start-time')
+        ) || parseFloat(
+          $event.target.parentElement.getAttribute('data-start-time')
+        );
+        this.UPDATE_USER_TIME_REQUEST(startTime);
       },
       touchHoldHandler() {
         console.log('touch hold');
-      }, */
+      }
     }
   };
 </script>
