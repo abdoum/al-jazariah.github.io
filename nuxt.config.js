@@ -1,6 +1,6 @@
 export default {
   // Disable server-side rendering: https://go.nuxtjs.dev/ssr-mode
-  ssr: false,
+//   ssr: false,
   server: {
     host: '0.0.0.0'
   },
@@ -22,7 +22,7 @@ export default {
     ],
     link: [{ rel: 'icon', type: 'image/x-icon', href: '/favicon.ico' }]
   },
-
+  // Custom loader
   // Global CSS: https://go.nuxtjs.dev/config-css
   css: ['~/assets/css/style.css'],
 
@@ -30,6 +30,7 @@ export default {
   plugins: [
     '~/plugins/vue-shortkey.client.js',
     '~/plugins/vue-hammer.client.js',
+    '~/plugins/vue-touch-events.client.js',
     '~/plugins/vuex-persist.client.js'
   ],
 

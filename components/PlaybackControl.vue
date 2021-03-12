@@ -44,7 +44,8 @@
             ifShow: !this.playback,
             classes: {
               'text-yellow-800': this.playback,
-              hidden: this.canPlay < 3,
+              hidden: !this.canPlay,
+              'animate-pulse text-indigo-700 shadow-xl': this.canPlay,
               'focus:outline-none': true
             },
             onclick: () => this.UPDATE_PLAYBACK(!this.playback)
@@ -53,7 +54,7 @@
             icon: 'PauseIcon',
             ifShow: this.playback,
             classes: {
-              'text-yellow-800': this.playback,
+              'text-indigo-700 shadow-xl': this.playback,
               'focus:outline-none': true
             },
             onclick: () => this.UPDATE_PLAYBACK(!this.playback)

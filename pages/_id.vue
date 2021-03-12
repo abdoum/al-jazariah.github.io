@@ -1,5 +1,5 @@
 <template>
-  <div class="h-screen overflow-auto">
+  <div class="">
     <Video :time="userTimeRequest" />
     <Vers
       :chapters="displayedChapter"
@@ -7,7 +7,7 @@
       :currentTimecode="currentTimecode"
       :secondHalfStartTime="secondHalfStartTime"
       :userTimeRequest="userTimeRequest"
-      v-hammer:swipe="(event) => onSwipe(event)"
+      v-touch:swipe="onSwipe"
     />
     <div
       ref="left"
@@ -57,7 +57,8 @@
   export default {
     data() {
       return {
-        left: require('~/assets/svg/left.svg')
+        swipeLeft: false,
+        swipeRight: false
       };
     },
     async asyncData({ $content, params }) {
@@ -140,20 +141,11 @@
     },
     methods: {
       onSwipe(event) {
-        /*       DIRECTION_NONE	1
-    DIRECTION_LEFT	2
-    DIRECTION_RIGHT	4
-    DIRECTION_UP	8
-    DIRECTION_DOWN	16
-    DIRECTION_HORIZONTAL	6
-    DIRECTION_VERTICAL	24
-    DIRECTION_ALL	30
-    */
-
-        if (event.direction === 2) {
+        if (event === 'left') {
+          this.swipeLeft = true;
           this.$refs.left.classList.remove('hidden');
           this.gotToNextChapter();
-        } else if (event.direction === 4) {
+        } else if (event === 'right') {
           this.$refs.right.classList.remove('hidden');
           this.gotToPreviousChapter();
         }
