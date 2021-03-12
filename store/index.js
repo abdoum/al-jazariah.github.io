@@ -18,7 +18,7 @@ export const state = () => ({
   canPlay: false,
   sound: true,
   indexModal: false,
-  definitionModal: true,
+  definitionModal: false,
   index: null
 });
 

@@ -1,7 +1,6 @@
 <template>
   <div class="min-h-screen">
     <TableOfContentStatic :chapters="chapters" :anchors="anchors" />
-    <Drawer :chapters="chapters" />
   </div>
 </template>
 
@@ -44,7 +43,6 @@
   }
   .page-enter,
   .page-leave-to {
-    /* transform: translateX(600px); */
     opacity: 0;
   }
 </style>

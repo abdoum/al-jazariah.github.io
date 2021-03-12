@@ -1,9 +1,7 @@
 <template>
-
   <div class="sticky sm:fixed sm:right-0 w-full bottom-0 sm:w-auto">
     <div class="rounded-tl-xl bg-gray-200 shadow-l-2xl p-4">
       <div class="flex sm:flex-col sm:space-y-4 justify-around">
-
         <div
           class="rounded-md text-gray-600 flex text-2xl font-extrabold focus:outline-none"
           v-for="(e, i) in controls"
@@ -113,7 +111,6 @@
             title: 'كنم الصوت',
             classes: {
               'text-indigo-700': !this.sound
-
             },
             onclick: () => this.UPDATE_SOUND(!this.sound)
           },
@@ -157,7 +154,6 @@
               'rounded-2xl': this.playbackRate !== 1,
               'focus:outline-none': true,
               'text-indigo-700': this.playbackRate !== 1,
-
 
               'opacity-50': this.playbackRate === 1
             },
@@ -203,13 +199,8 @@
               'focus:outline-none': true
             },
             onclick: () => {
-
-            //   this.$router.push('/');
-            console.log("🚀 ~ file: PlaybackControl.vue ~ line 180 ~ controls ~ this.indexModal", this.indexModal)
-            this.UPDATE_INDEX_MODAL(!this.indexModal)
-            console.log("🚀 ~ file: PlaybackControl.vue ~ line 180 ~ controls ~ this.indexModal", this.indexModal)
-
-              this.UPDATE_CURRENT_LOOP_CHAPTER_COUNT(0);
+              this.UPDATE_INDEX_MODAL(!this.indexModal);
+              //   this.UPDATE_CURRENT_LOOP_CHAPTER_COUNT(0);
             }
           },
           {

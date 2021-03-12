@@ -1,6 +1,7 @@
 <template>
   <nav
     class="flex fixed w-full items-center justify-between px-6 h-16 bg-white text-gray-700 border-b border-gray-200 z-10"
+    v-touch:swipe.right="drawer"
   >
 
     <transition
@@ -84,6 +85,9 @@
       handleClick(id) {
         this.UPDATE_INDEX_MODAL(false);
         this.$router.push(`/${id}`);
+      },
+      drawer() {
+        this.UPDATE_INDEX_MODAL(false);
       }
     },
     watch: {
