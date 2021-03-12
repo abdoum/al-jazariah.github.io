@@ -1,7 +1,9 @@
 <template>
+
   <div class="sticky sm:fixed sm:right-0 w-full bottom-0 sm:w-auto">
     <div class="rounded-tl-xl bg-gray-200 shadow-l-2xl p-4">
       <div class="flex sm:flex-col sm:space-y-4 justify-around">
+
         <div
           class="rounded-md text-gray-600 flex text-2xl font-extrabold focus:outline-none"
           v-for="(e, i) in controls"
@@ -43,11 +45,13 @@
           {
             icon: 'PlayIcon',
             ifShow: !this.playback,
+
             title: 'تشغيل',
             classes: {
               'text-yellow-800': this.playback,
               hidden: !this.canPlay,
               'animate-pulse text-indigo-700 shadow-xl': this.canPlay,
+
               'focus:outline-none': true
             },
             onclick: () => this.UPDATE_PLAYBACK(!this.playback)
@@ -55,9 +59,11 @@
           {
             icon: 'PauseIcon',
             ifShow: this.playback,
+
             title: 'وقوف مؤقت',
             classes: {
               'text-indigo-700 shadow-xl': this.playback,
+
               'focus:outline-none': true
             },
             onclick: () => this.UPDATE_PLAYBACK(!this.playback)
@@ -65,7 +71,9 @@
           {
             icon: 'FastForwardIcon',
             ifShow: true,
+
             title: this.nextChapter.content,
+
             disabled: !this.nextChapter,
             classes: {
               'opacity-50': !this.nextChapter,
@@ -79,7 +87,9 @@
           {
             icon: 'RewindIcon',
             ifShow: true,
+
             title: this.previousChapter.content,
+
             disabled: this.currentChapter
               ? this.currentChapter.id === 0
               : false,
@@ -99,16 +109,20 @@
           {
             icon: 'MuteIcon',
             ifShow: true,
+
             title: 'كنم الصوت',
             classes: {
               'text-indigo-700': !this.sound
+
             },
             onclick: () => this.UPDATE_SOUND(!this.sound)
           },
           {
             icon: 'LoopIcon',
             ifShow: true,
+
             title: 'تكرار',
+
             additionnalInfo: {
               content:
                 this.currentLoopChapterCount === 1
@@ -131,7 +145,9 @@
           {
             icon: 'SpeedIcon',
             ifShow: true,
+
             title: 'تغيير السرعة',
+
             additionnalInfo: {
               content: this.playbackRate,
               classes: [{ 'text-indigo-700': this.playbackRate !== 1 }]
@@ -141,6 +157,8 @@
               'rounded-2xl': this.playbackRate !== 1,
               'focus:outline-none': true,
               'text-indigo-700': this.playbackRate !== 1,
+
+
               'opacity-50': this.playbackRate === 1
             },
             onclick: () => {
@@ -178,15 +196,19 @@
           {
             icon: 'MenuIcon',
             ifShow: true,
+
             title: 'الفهرس',
+
             classes: {
               'focus:outline-none': true
             },
             onclick: () => {
+
             //   this.$router.push('/');
             console.log("🚀 ~ file: PlaybackControl.vue ~ line 180 ~ controls ~ this.indexModal", this.indexModal)
             this.UPDATE_INDEX_MODAL(!this.indexModal)
             console.log("🚀 ~ file: PlaybackControl.vue ~ line 180 ~ controls ~ this.indexModal", this.indexModal)
+
               this.UPDATE_CURRENT_LOOP_CHAPTER_COUNT(0);
             }
           },
@@ -220,7 +242,9 @@
         'currentLoopVersCount',
         'loopChapterCount',
         'canPlay',
+
         'indexModal',
+
         'currentLoopChapterCount'
       ]),
       formattedTimecode() {
@@ -242,7 +266,9 @@
         'UPDATE_PLAYBACK_RATE',
         'UPDATE_USER_TIME_REQUEST',
         'UPDATE_CURRENT_LOOP_VERS_COUNT',
+
         'UPDATE_INDEX_MODAL',
+
         'UPDATE_CURRENT_LOOP_CHAPTER_COUNT'
       ])
     }

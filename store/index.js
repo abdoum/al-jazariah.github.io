@@ -188,6 +188,7 @@ export const getters = {
   index: (state) => {
     return state.index;
   },
+
   canPlay: (state) => {
     return state.canPlay;
   },
@@ -198,6 +199,7 @@ export const getters = {
     return state.definitionModal;
   },
   anchors: (state) => {
+
     let sections;
     if (!state.poeme) {
       sections = null;

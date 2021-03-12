@@ -77,8 +77,10 @@
 
         this.UPDATE_CURRENT_LINE();
         this.UPDATE_TIMECODE($event.target.currentTime);
+
         this.audio.addEventListener('canplay', () => {
           this.UPDATE_CAN_PLAY(true);
+
         });
         //   if (this.currentLoopChapterCount > 1) {
         //     if (

@@ -30,7 +30,9 @@ export default {
   plugins: [
     '~/plugins/vue-shortkey.client.js',
     '~/plugins/vue-hammer.client.js',
+
     '~/plugins/vue-touch-events.client.js',
+
     '~/plugins/vuex-persist.client.js'
   ],
 

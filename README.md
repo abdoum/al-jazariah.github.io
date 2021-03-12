@@ -17,9 +17,10 @@ The project is using [nuxtjs].
 ```bash
 
 git clone https://github.com/abdoum/al-jazariah.github.io
-cd al-jazaria.github.io
-npm i
-npm run dev
+
+cd al-jazariah.github.io
+
+npm i && npm run dev
 
 
 ```

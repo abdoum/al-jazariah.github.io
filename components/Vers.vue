@@ -1,14 +1,17 @@
 <template>
+
   <div class="min-h-screen">
     <div class="grid grid-cols-2 place-content-center">
       <div class="col-span-2">
         <h1
           class="font-body text-center title text-3xl text-gray-700 sm:text-5xl py-10 pb-20 print:pt-0"
           :data-starttime="chapter.startTime"
+
         >
           {{ chapter.content }}
         </h1>
       </div>
+
       <div class="col-span-2 space-y-4 mx-16 sm:mx-32 md:mx-auto">
         <div
           v-for="v in chapter.vers"
@@ -43,6 +46,7 @@
             :data-start="v.startTime"
           ></div>
         </div>
+
       </div>
     </div>
 
@@ -103,6 +107,7 @@
         swipeRight: false
       };
     },
+
     methods: {
       ...mapMutations(['UPDATE_USER_TIME_REQUEST']),
       longtapHandler($event) {
@@ -115,14 +120,17 @@
       },
       touchHoldHandler() {
         console.log('touch hold');
+
       }
     }
   };
 </script>
 
 <style>
+
   div :not(.current-line) > .red {
     color: #f56565;
+
   }
   .vers > div::after {
     content: '';
