@@ -1,6 +1,7 @@
 <template>
-  <div>
+  <div class="min-h-screen">
     <TableOfContentStatic :chapters="chapters" :anchors="anchors" />
+    <Drawer :chapters="chapters" />
   </div>
 </template>
 

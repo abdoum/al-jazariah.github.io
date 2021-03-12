@@ -22,7 +22,7 @@ export default {
     ],
     link: [{ rel: 'icon', type: 'image/x-icon', href: '/favicon.ico' }]
   },
-
+  // Custom loader
   // Global CSS: https://go.nuxtjs.dev/config-css
   css: ['~/assets/css/style.css'],
 
@@ -30,6 +30,9 @@ export default {
   plugins: [
     '~/plugins/vue-shortkey.client.js',
     '~/plugins/vue-hammer.client.js',
+
+    '~/plugins/vue-touch-events.client.js',
+
     '~/plugins/vuex-persist.client.js'
   ],
 

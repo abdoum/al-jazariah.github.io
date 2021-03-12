@@ -1,5 +1,5 @@
-import * as mutationTypes from "./mutation-types";
-import * as actionTypes from "./action-types";
+import * as mutationTypes from './mutation-types';
+import * as actionTypes from './action-types';
 
 export const state = () => ({
   currentTimecode: 0,
@@ -17,6 +17,8 @@ export const state = () => ({
   playbackRate: 1,
   canPlay: false,
   sound: true,
+  indexModal: false,
+  definitionModal: true,
   index: null
 });
 
@@ -70,22 +72,28 @@ export const mutations = {
   },
   [mutationTypes.SET_INDEX](state, payload) {
     state.index = payload;
+  },
+  [mutationTypes.UPDATE_INDEX_MODAL](state, payload) {
+    state.indexModal = payload;
+  },
+  [mutationTypes.UPDATE_DEFINITION_MODAL](state, payload) {
+    state.definitionModal = payload;
   }
 };
 
 export const actions = {
   [actionTypes.UPDATE_TIME_LINES_AND_CHAPTERS]({ commit, getters }, newTime) {
-    commit("UPDATE_USER_TIME_REQUEST", newTime);
-    commit("UPDATE_CURRENT_LINE", getters.currentLine);
-    commit("UPDATE_NEXT_LINE", getters.nextLine);
-    commit("UPDATE_PREVIOUS_LINE", getters.previousLine);
+    commit('UPDATE_USER_TIME_REQUEST', newTime);
+    commit('UPDATE_CURRENT_LINE', getters.currentLine);
+    commit('UPDATE_NEXT_LINE', getters.nextLine);
+    commit('UPDATE_PREVIOUS_LINE', getters.previousLine);
   }
 };
 export const getters = {
   currentLine: (state, getters) => {
     if (!state.poeme) return;
     const lines = getters.vers.filter(
-      el => el.startTime <= getters.currentTimecode || el.id === 0
+      (el) => el.startTime <= getters.currentTimecode || el.id === 0
     );
     if (!lines) {
       return state.poeme[0];
@@ -95,7 +103,7 @@ export const getters = {
   previousLine: (state, getters) => {
     if (!state.poeme) return 0;
     const lines = getters.vers.filter(
-      el => el.id === getters.currentLine.id - 1
+      (el) => el.id === getters.currentLine.id - 1
     );
     if (lines.length < 1) {
       return state.poeme[0];
@@ -104,7 +112,9 @@ export const getters = {
   },
   nextLine: (state, getters) => {
     if (!state.poeme) return 1;
-    const lines = getters.vers.find(el => el.id === getters.currentLine.id + 1);
+    const lines = getters.vers.find(
+      (el) => el.id === getters.currentLine.id + 1
+    );
     if (!lines) {
       return;
     }
@@ -113,7 +123,7 @@ export const getters = {
   currentChapter: (state, getters) => {
     if (!state.poeme) return;
     const lines = getters.chapters.filter(
-      el => el.startTime <= state.currentTimecode
+      (el) => el.startTime <= state.currentTimecode
     );
     return lines[lines.length - 1];
   },
@@ -122,19 +132,19 @@ export const getters = {
       return;
     }
     const lines = getters.chapters.filter(
-      el => el.id < getters.currentChapter.id || el.id === 0
+      (el) => el.id < getters.currentChapter.id || el.id === 0
     );
     if (!lines) {
       return;
     }
-    return lines[lines.length -1];
+    return lines[lines.length - 1];
   },
   nextChapter: (state, getters) => {
     if (!getters.currentChapter) {
       return;
     }
     const chapter = getters.chapters.find(
-      el => el.id > getters.currentChapter.id
+      (el) => el.id > getters.currentChapter.id
     );
     if (!chapter) {
       return getters.currentChapter;
@@ -142,61 +152,69 @@ export const getters = {
     return chapter;
   },
 
-  userTimeRequest: state => {
+  userTimeRequest: (state) => {
     return state.userTimeRequest;
   },
-  poeme: state => {
+  poeme: (state) => {
     return state.poeme;
   },
-  currentTimecode: state => {
+  currentTimecode: (state) => {
     return state.currentTimecode;
   },
-  playback: state => {
+  playback: (state) => {
     return state.playback;
   },
-  loopChapterCount: state => {
+  loopChapterCount: (state) => {
     return state.loopChapterCount;
   },
-  currentLoopChapterCount: state => {
+  currentLoopChapterCount: (state) => {
     return state.currentLoopChapterCount;
   },
-  loopVersCount: state => {
+  loopVersCount: (state) => {
     return state.loopVersCount;
   },
-  currentLoopVersCount: state => {
+  currentLoopVersCount: (state) => {
     return state.currentLoopVersCount;
   },
-  playbackRates: state => {
+  playbackRates: (state) => {
     return state.playbackRates;
   },
-  playbackRate: state => {
+  playbackRate: (state) => {
     return state.playbackRate;
   },
-  sound: state => {
+  sound: (state) => {
     return state.sound;
   },
-  index: state => {
+  index: (state) => {
     return state.index;
   },
-  canPlay: state => {
+
+  canPlay: (state) => {
     return state.canPlay;
   },
-  anchors: state => {
+  indexModal: (state) => {
+    return state.indexModal;
+  },
+  definitionModal: (state) => {
+    return state.definitionModal;
+  },
+  anchors: (state) => {
+
     let sections;
     if (!state.poeme) {
       sections = null;
     } else {
-      sections = state.poeme.map(e => e.id.toString());
-      sections.unshift("toc");
+      sections = state.poeme.map((e) => e.id.toString());
+      sections.unshift('toc');
     }
     return sections;
   },
-  chapters: state => {
+  chapters: (state) => {
     let sections;
     if (!state.poeme) {
       sections = null;
     } else {
-      sections = state.poeme.filter(e => e.type === "title");
+      sections = state.poeme.filter((e) => e.type === 'title');
     }
     return sections;
   },
@@ -205,7 +223,7 @@ export const getters = {
     if (!state.poeme) {
       sections = null;
     } else {
-      getters.chapters.forEach(element => {
+      getters.chapters.forEach((element) => {
         sections.push(element.vers);
       });
       sections = sections.flat();

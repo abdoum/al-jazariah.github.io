@@ -2,7 +2,7 @@
   <svg
     xmlns="http://www.w3.org/2000/svg"
     fill="none"
-    width="30"
+    width="24"
     viewBox="0 0 24 24"
     stroke="currentColor"
   >
@@ -24,5 +24,3 @@
 <script>
 export default {};
 </script>
-
-<style></style>
