@@ -12,15 +12,17 @@
     }"
     @shortkey="controlPlayback"
   >
-    <audio
-      class="poeme"
-      ref="audio"
-
-      type="audio/ogg"
-      preload='auto'
-    ><source src="jaz.ogg" type="audio/ogg" codecs="vorbis">
-      <source src="jaz.mp3" type="audio/mpeg" codecs="mp3"><p>المتصفح لا يتحمل قراءة الصوت لتحميل الملف
-     <a href="jaz.mp3">انقر هنا</a>.</p></audio>
+    <audio class="poeme" ref="audio" type="audio/ogg" preload="auto">
+      <source src="jaz.ogg" type="audio/ogg" codecs="vorbis" />
+      >
+      <source src="jaz.m4a" type="audio/mpeg" codecs="aac" />
+      <source src="jaz.aac" type="audio/mpeg" codecs="aac" />
+      <source src="jaz.mp3" type="audio/mpeg" codecs="mp3" />
+      <p>
+        المتصفح لا يتحمل قراءة الصوت لتحميل الملف
+        <a href="jaz.mp3">انقر هنا</a>.
+      </p>
+    </audio>
   </div>
 </template>
 
@@ -82,7 +84,6 @@
 
         this.audio.addEventListener('canplay', () => {
           this.UPDATE_CAN_PLAY(true);
-
         });
         //   if (this.currentLoopChapterCount > 1) {
         //     if (
