@@ -18,8 +18,8 @@
 
       type="audio/ogg"
       preload='auto'
-    ><source src="jaz.ogg" type="audio/ogg">
-      <source src="jaz.mp3" type="audio/mpeg"><p>المتصفح لا يتحمل قراءة الصوت لتحميل الملف
+    ><source src="jaz.ogg" type="audio/ogg" codecs="vorbis">
+      <source src="jaz.mp3" type="audio/mpeg" codecs="mp3"><p>المتصفح لا يتحمل قراءة الصوت لتحميل الملف
      <a href="jaz.mp3">انقر هنا</a>.</p></audio>
   </div>
 </template>
