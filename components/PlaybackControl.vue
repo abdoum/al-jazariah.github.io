@@ -14,6 +14,8 @@
             :class="e.classes"
             @click="e.onclick"
             :disabled="e.disabled"
+            v-touch:longtap="e.longtapHandler"
+            v-touch-options="{ disableClick: true }"
           >
             <component :is="e.icon"></component>
             <span
@@ -46,11 +48,10 @@
 
             title: 'تشغيل',
             classes: {
-              'text-yellow-800': this.playback,
               hidden: !this.canPlay,
-              'animate-pulse text-indigo-700 shadow-xl': this.canPlay,
+              'animate-pulse text-red-500 shadow-xl': this.canPlay,
 
-              'focus:outline-none': true
+              'focus:outline-none focus:text-red-500': true
             },
             onclick: () => this.UPDATE_PLAYBACK(!this.playback)
           },
@@ -60,22 +61,20 @@
 
             title: 'وقوف مؤقت',
             classes: {
-              'text-indigo-700 shadow-xl': this.playback,
+              'text-red-500 shadow-xl': this.playback,
 
-              'focus:outline-none': true
+              'focus:outline-none focus:text-red-500': true
             },
             onclick: () => this.UPDATE_PLAYBACK(!this.playback)
           },
           {
             icon: 'FastForwardIcon',
             ifShow: true,
-
             title: this.nextChapter.content,
-
             disabled: !this.nextChapter,
             classes: {
               'opacity-50': !this.nextChapter,
-              'focus:outline-none': true
+              'focus:outline-none focus:text-red-500': true
             },
             onclick: () => {
               this.UPDATE_TIME_LINES_AND_CHAPTERS(this.nextChapter.startTime);
@@ -85,9 +84,7 @@
           {
             icon: 'RewindIcon',
             ifShow: true,
-
             title: this.previousChapter.content,
-
             disabled: this.currentChapter
               ? this.currentChapter.id === 0
               : false,
@@ -95,7 +92,7 @@
               'opacity-50': this.currentChapter
                 ? this.currentChapter.id === 0
                 : false,
-              'focus:outline-none': true
+              'focus:outline-none focus:text-red-500': true
             },
             onclick: () => {
               this.UPDATE_TIME_LINES_AND_CHAPTERS(
@@ -107,54 +104,48 @@
           {
             icon: 'MuteIcon',
             ifShow: true,
-
             title: 'كنم الصوت',
             classes: {
-              'text-indigo-700': !this.sound
+              'text-red-500': !this.sound,
+              'focus:outline-none': true
             },
             onclick: () => this.UPDATE_SOUND(!this.sound)
           },
           {
             icon: 'LoopIcon',
             ifShow: true,
-
             title: 'تكرار',
-
             additionnalInfo: {
               content:
                 this.currentLoopChapterCount === 1
                   ? 'OFF'
                   : this.currentLoopChapterCount,
-              classes: [{ 'text-indigo-700': this.currentLoopChapterCount > 1 }]
+              classes: [{ 'text-red-500': this.currentLoopChapterCount > 1 }]
             },
             classes: {
-              'bg-indigo-200': this.currentLoopChapterCount > 1,
               'rounded-2xl': this.currentLoopChapterCount > 1,
               'focus:outline-none': true,
-              'text-indigo-700': this.currentLoopChapterCount > 1,
+              'text-red-500': this.currentLoopChapterCount > 1,
               'opacity-50': this.currentLoopChapterCount === 1
             },
             onclick: () =>
               this.UPDATE_CURRENT_LOOP_CHAPTER_COUNT(
                 this.loopChapterCount[this.currentLoopChapterCount]
-              )
+              ),
+            longtapHandler: () => {
+              this.UPDATE_CURRENT_LOOP_CHAPTER_COUNT(this.loopChapterCount[0]);
+            }
           },
           {
             icon: 'SpeedIcon',
             ifShow: true,
-
             title: 'تغيير السرعة',
-
             additionnalInfo: {
-              content: this.playbackRate,
-              classes: [{ 'text-indigo-700': this.playbackRate !== 1 }]
+              content: this.playbackRate === 1 ? 'OFF' : this.playbackRate,
             },
             classes: {
-              'bg-indigo-200': this.playbackRate !== 1,
-              'rounded-2xl': this.playbackRate !== 1,
+              'rounded-2xl text-red-500': this.playbackRate !== 1,
               'focus:outline-none': true,
-              'text-indigo-700': this.playbackRate !== 1,
-
               'opacity-50': this.playbackRate === 1
             },
             onclick: () => {
@@ -167,6 +158,9 @@
                     ]
                   : this.playbackRates[0]
               );
+            },
+            longtapHandler: () => {
+              this.UPDATE_PLAYBACK_RATE(this.playbackRates[1]);
             }
           },
 
@@ -192,11 +186,9 @@
           {
             icon: 'MenuIcon',
             ifShow: true,
-
             title: 'الفهرس',
-
             classes: {
-              'focus:outline-none': true
+              'focus:outline-none focus:text-red-500': true
             },
             onclick: () => {
               this.UPDATE_INDEX_MODAL(!this.indexModal);
@@ -205,6 +197,9 @@
           },
           {
             ifShow: true,
+            classes: {
+              'focus:outline-none select-none cursor-not-allowed:': true
+            },
             additionnalInfo: {
               content: this.formattedTimecode
             },

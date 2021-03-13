@@ -1,12 +1,16 @@
 <template>
-
   <div class="min-h-screen">
-    <div class="grid grid-cols-2 place-content-center">
+    <div
+      class="grid grid-cols-2 place-content-center"
+      :class="{ 'bg-gray-800 text-gray-700 transition duration-500': playback }"
+    >
       <div class="col-span-2">
         <h1
-          class="font-body text-center title text-3xl text-gray-700 sm:text-5xl py-10 pb-20 print:pt-0"
+          class="font-body text-center title text-3xl sm:text-5xl py-10 pb-20  text-gray-600 select-none print:pt-0"
+          :class="{
+            'transition duration-300 text-gray-700': playback
+          }"
           :data-starttime="chapter.startTime"
-
         >
           {{ chapter.content }}
         </h1>
@@ -16,16 +20,20 @@
         <div
           v-for="v in chapter.vers"
           :key="v.id"
-          class="vers font-body cursor-pointer transition duration-150 ease-in-out transform hover:-translate-y-1 hover:scale-105 active:scale-110 focus:-translate-y-1"
+          class="vers font-body cursor-pointer "
           :class="{
-            'scale-105': v.id === currentLine.id
+            'scale-105': v.id === currentLine.id,
+            'opacity-100': v.id === currentLine.id
           }"
+          v-touch:touchhold="touchHoldHandler"
         >
           <div
+            class="transition duration-150 ease-in-out transform hover:-translate-y-1 hover:scale-105 active:scale-110 text-gray-700 focus:-translate-y-1"
             :class="{
-              'text-red-500 current-line':
+              'transition duration-500 text-red-500 current-line scale-110':
                 v.id === currentLine.id &&
                 currentTimecode < secondHalfStartTime,
+              'text-gray-700 playback': playback,
               ...versTdClasses
             }"
             :data-startTime="v.startTime"
@@ -36,20 +44,20 @@
             :data-start-time="v.startTime"
           ></div>
           <div
+            class="transition duration-150 ease-in-out transform hover:-translate-y-1 hover:scale-105 active:scale-110 text-gray-700 focus:-translate-y-1"
             :class="{
-              'text-red-500 current-line':
+              'transition duration-500 text-red-500 current-line scale-110':
                 v.id === currentLine.id &&
                 currentTimecode > secondHalfStartTime,
+              'text-gray-700 playback': playback,
               ...versTdClasses
             }"
             v-html="v.content.split('-')[1]"
             :data-start="v.startTime"
           ></div>
         </div>
-
       </div>
     </div>
-
   </div>
 </template>
 
@@ -81,57 +89,57 @@
         type: Number,
         default: null,
         required: false
+      },
+      playback: {
+        type: Boolean,
+        default: null,
+        required: false
       }
     },
     data() {
       return {
         versTdClasses: {
-          'text-gray-900': true,
           'sm:text-3xl': true,
           'text-lg': true,
           'text-justify': true,
           'hover:text-red-500': true,
-          // "sm:leading-10": true,
-          // "leading-1": true,
-          // "sm:pt-12": true,
-          // "pt-6": true,
-          // "print:pt-0": true,
-          // "overflow-x-auto": true,
           'print:overflow-hidden': true,
           'select-none': true,
-          // "whitespace-nowrap": true,
-          // "w-2/5": true,
           poeme: true
         },
         swipeLeft: false,
-        swipeRight: false
+        swipeRight: false,
+        accentColorPlayback: '#4a5568',
+        accentColorNoPlayback: '#cbd5e0'
       };
     },
 
     methods: {
-      ...mapMutations(['UPDATE_USER_TIME_REQUEST']),
+      ...mapMutations(['UPDATE_USER_TIME_REQUEST', 'UPDATE_DEFINITION_MODAL']),
       longtapHandler($event) {
-        const startTime = parseFloat(
-          $event.target.getAttribute('data-start-time')
-        ) || parseFloat(
-          $event.target.parentElement.getAttribute('data-start-time')
-        );
+        const startTime =
+          parseFloat($event.target.getAttribute('data-start-time')) ||
+          parseFloat(
+            $event.target.parentElement.getAttribute('data-start-time')
+          );
         this.UPDATE_USER_TIME_REQUEST(startTime);
       },
       touchHoldHandler() {
+        this.UPDATE_DEFINITION_MODAL(true);
         console.log('touch hold');
-
       }
     }
   };
 </script>
 
 <style>
-
   div :not(.current-line) > .red {
-    color: #f56565;
-
+    color: #4a5568;
   }
+  div .current-line > .red {
+    color: #3182ce;
+  }
+
   .vers > div::after {
     content: '';
     display: inline-block;

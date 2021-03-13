@@ -15,10 +15,12 @@
     <audio
       class="poeme"
       ref="audio"
-      src="jaz.ogg"
+
       type="audio/ogg"
       preload='auto'
-    ></audio>
+    ><source src="jaz.ogg" type="audio/ogg">
+      <source src="jaz.mp3" type="audio/mpeg"><p>المتصفح لا يتحمل قراءة الصوت لتحميل الملف
+     <a href="jaz.mp3">انقر هنا</a>.</p></audio>
   </div>
 </template>
 

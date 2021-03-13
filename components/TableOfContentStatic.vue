@@ -1,7 +1,7 @@
 <template>
   <div
 
-    class="bg-gradient-to-r from-green-100 to-teal-100 p-10 grid grid-cols-1  leading-loose place-items-center min-h-screen"
+    class="bg-gray-800 p-10 grid grid-cols-1 leading-loose place-items-center min-h-screen"
 
   >
     <div
@@ -11,9 +11,9 @@
     >
       <nuxt-link
         :to="'/' + p.id"
-        class=" text-xl md:text-3xl text-green-900 hover:underline font-light"
+        class=" text-xl md:text-3xl text-gray-400 hover:underline"
         no-prefetch
-        ><span class="text-orange-700">{{ Intl.NumberFormat("ar-SA").format(i + 1) }} -</span>
+        ><span class="text-gray-600">{{ Intl.NumberFormat("ar-SA").format(i + 1) }} -</span>
 
         {{ p.content }}</nuxt-link
 

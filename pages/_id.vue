@@ -1,7 +1,5 @@
 <template>
-
   <div class="">
-
     <Video :time="userTimeRequest" />
     <Vers
       :chapter="displayedChapter"
@@ -9,7 +7,7 @@
       :currentTimecode="currentTimecode"
       :secondHalfStartTime="secondHalfStartTime"
       :userTimeRequest="userTimeRequest"
-
+      :playback="playback"
       v-touch:swipe="onSwipe"
     />
     <Drawer :chapters="chapters" />
@@ -64,7 +62,6 @@
   export default {
     data() {
       return {
-
         swipeLeft: false,
         swipeRight: false
       };
@@ -144,18 +141,15 @@
             );
           }
         }
-
       }
     },
     methods: {
       onSwipe(event) {
-
         if (event === 'left') {
           this.swipeLeft = true;
           this.$refs.left.classList.remove('hidden');
           this.gotToNextChapter();
         } else if (event === 'right') {
-
           this.$refs.right.classList.remove('hidden');
           this.gotToPreviousChapter();
         }
