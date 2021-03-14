@@ -1,30 +1,35 @@
 <template>
-  <div class="sticky sm:fixed sm:right-0 w-full bottom-0 sm:w-auto">
-    <div class="rounded-tl-xl bg-gray-200 shadow-l-2xl p-4">
-      <div class="flex sm:flex-col sm:space-y-4 justify-around">
-        <div
-          class="rounded-md text-gray-600 flex text-2xl font-extrabold focus:outline-none"
-          v-for="(e, i) in controls"
-          :key="i"
-          v-show="e.ifShow"
-          :title="e.title"
-        >
-          <button
-            type="button"
-            :class="e.classes"
-            @click="e.onclick"
-            :disabled="e.disabled"
-            v-touch:longtap="e.longtapHandler"
-            v-touch-options="{ disableClick: true }"
+  <div>
+    <div
+      class="sticky sm:fixed bottom-0 right-0 w-full sm:w-auto bg-gray-800 overflow-auto"
+      v-show="isVisible"
+    >
+      <div class="rounded-tl-xl bg-gray-200 shadow-l-2xl p-4">
+        <div class="flex sm:flex-col sm:space-y-4 justify-around">
+          <div
+            class="rounded-md text-gray-600 flex text-2xl font-extrabold focus:outline-none"
+            v-for="(e, i) in controls"
+            :key="i"
+            v-show="e.ifShow"
+            :title="e.title"
           >
-            <component :is="e.icon"></component>
-            <span
-              class="block py-0 text-xs"
-              v-if="e.additionnalInfo && e.additionnalInfo.content !== 1"
-              :class="e.additionnalInfo.classes"
-              >{{ e.additionnalInfo.content }}</span
+            <button
+              type="button"
+              :class="e.classes"
+              @click="e.onclick"
+              :disabled="e.disabled"
+              v-touch:longtap="e.longtapHandler"
+              v-touch-options="{ disableClick: true }"
             >
-          </button>
+              <component :is="e.icon"></component>
+              <span
+                class="block py-0 text-xs"
+                v-if="e.additionnalInfo && e.additionnalInfo.content !== 1"
+                :class="e.additionnalInfo.classes"
+                >{{ e.additionnalInfo.content }}</span
+              >
+            </button>
+          </div>
         </div>
       </div>
     </div>
@@ -45,10 +50,9 @@
           {
             icon: 'PlayIcon',
             ifShow: !this.playback,
-
             title: 'تشغيل',
             classes: {
-              hidden: !this.canPlay,
+              //   hidden: !this.canPlay,
               'animate-pulse text-red-500 shadow-xl': this.canPlay,
 
               'focus:outline-none focus:text-red-500': true
@@ -120,7 +124,9 @@
                 this.currentLoopChapterCount === 1
                   ? 'OFF'
                   : this.currentLoopChapterCount,
-              classes: [{ 'text-red-500': this.currentLoopChapterCount > 1 }]
+              classes: [
+                { 'text-red-500 select-none': this.currentLoopChapterCount > 1 }
+              ]
             },
             classes: {
               'rounded-2xl': this.currentLoopChapterCount > 1,
@@ -141,10 +147,10 @@
             ifShow: true,
             title: 'تغيير السرعة',
             additionnalInfo: {
-              content: this.playbackRate === 1 ? 'OFF' : this.playbackRate,
+              content: this.playbackRate === 1 ? 'OFF' : this.playbackRate
             },
             classes: {
-              'rounded-2xl text-red-500': this.playbackRate !== 1,
+              'rounded-2xl text-red-500 select-none': this.playbackRate !== 1,
               'focus:outline-none': true,
               'opacity-50': this.playbackRate === 1
             },
@@ -192,7 +198,6 @@
             },
             onclick: () => {
               this.UPDATE_INDEX_MODAL(!this.indexModal);
-              //   this.UPDATE_CURRENT_LOOP_CHAPTER_COUNT(0);
             }
           },
           {
@@ -257,6 +262,18 @@
 
         'UPDATE_CURRENT_LOOP_CHAPTER_COUNT'
       ])
+    },
+    mounted() {
+      this.isVisible = true;
     }
   };
 </script>
+<style scoped>
+  .fade-enter-active,
+  .fade-leave-active {
+    transition: all 0.8s;
+  }
+  .fade-enter, .fade-leave-to /* .fade-leave-active below version 2.1.8 */ {
+    translate: translateX(0px);
+  }
+</style>

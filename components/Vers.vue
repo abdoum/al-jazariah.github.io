@@ -126,7 +126,6 @@
       },
       touchHoldHandler() {
         this.UPDATE_DEFINITION_MODAL(true);
-        console.log('touch hold');
       }
     }
   };

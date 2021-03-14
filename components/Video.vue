@@ -12,7 +12,8 @@
     }"
     @shortkey="controlPlayback"
   >
-    <audio class="poeme" ref="audio" type="audio/ogg" preload="auto">
+    <audio class="poeme" ref="audio" preload="auto">
+      <!-- <source src="jaz.mp4" type="video/mp4" /> -->
       <source src="jaz.ogg" type="audio/ogg" codecs="vorbis" />
       >
       <source src="jaz.m4a" type="audio/mpeg" codecs="aac" />
