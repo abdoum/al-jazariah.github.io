@@ -29,7 +29,6 @@ export default {
   // Plugins to run before rendering page: https://go.nuxtjs.dev/config-plugins
   plugins: [
     '~/plugins/vue-shortkey.client.js',
-    '~/plugins/vue-hammer.client.js',
 
     '~/plugins/vue-touch-events.client.js',
 
@@ -62,8 +61,29 @@ export default {
 
   // PWA module configuration: https://go.nuxtjs.dev/pwa
   pwa: {
+    meta: {
+      name: 'متن الجزرية',
+      ogHost: 'https://github.com',
+      ogImage: true,
+      ogDescription:
+        'منظومة المقدمة من نظم إمام الحفاظ و حجة القراء محمد بن محمد بن محمد بن علي بن يوسف ابن الجزري رحمه الله تعالى',
+      lang: 'ar',
+      theme_color: '#2d3748',
+      mobileAppIOS: true
+    },
     manifest: {
-      lang: 'ar'
+      name: 'Al Jazaria',
+      short_name: 'متن الجزرية',
+      description:
+        'منظومة المقدمة من نظم إمام الحفاظ و حجة القراء محمد بن محمد بن محمد بن علي بن يوسف ابن الجزري رحمه الله تعالى',
+      lang: 'ar',
+      background_color: '#2d3748',
+      dir: 'rtl'
+    },
+    workbox: {
+      enabled: true,
+      debug: true,
+      offlineAssets: ['~/static/audio/', '~/assets/fonts/']
     }
   },
 
@@ -74,5 +94,16 @@ export default {
   },
 
   // Build Configuration: https://go.nuxtjs.dev/config-build
-  build: {}
+  build: {},
+  render: {
+    http2: {
+      push: true,
+      pushAssets: (req, res, publicPath, preloadFiles) =>
+        preloadFiles
+          .filter(
+            (f) => f.file === 'Amiri-Regular.ttf'
+          )
+          .map((f) => `<${publicPath}${f.file}>; rel=preload; as=${f.asType}`)
+    }
+  }
 };

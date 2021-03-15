@@ -13,7 +13,7 @@
         :to="'/' + p.id"
         class=" text-xl md:text-3xl text-gray-400 hover:underline"
         no-prefetch
-        ><span class="text-gray-600">{{ Intl.NumberFormat("ar-SA").format(i + 1) }} -</span>
+        ><span class="text-gray-400">{{ Intl.NumberFormat("ar-SA").format(i + 1) }} -</span>
 
         {{ p.content }}</nuxt-link
 

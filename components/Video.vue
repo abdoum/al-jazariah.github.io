@@ -14,14 +14,14 @@
   >
     <audio class="poeme" ref="audio" preload="auto">
       <!-- <source src="jaz.mp4" type="video/mp4" /> -->
-      <source src="jaz.ogg" type="audio/ogg" codecs="vorbis" />
+      <source src="audio/jaz.ogg" type="audio/ogg" codecs="vorbis" />
       >
-      <source src="jaz.m4a" type="audio/mpeg" codecs="aac" />
-      <source src="jaz.aac" type="audio/mpeg" codecs="aac" />
-      <source src="jaz.mp3" type="audio/mpeg" codecs="mp3" />
+      <source src="audio/jaz.m4a" type="audio/mpeg" codecs="aac" />
+      <source src="audio/jaz.aac" type="audio/mpeg" codecs="aac" />
+      <source src="audio/jaz.mp3" type="audio/mpeg" codecs="mp3" />
       <p>
         المتصفح لا يتحمل قراءة الصوت لتحميل الملف
-        <a href="jaz.mp3">انقر هنا</a>.
+        <a href="audio/jaz.mp3">انقر هنا</a>.
       </p>
     </audio>
   </div>

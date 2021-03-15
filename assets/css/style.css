@@ -2,10 +2,10 @@
 @import 'tailwindcss/components';
 @import 'tailwindcss/utilities';
 
-
 @font-face {
-  font-family: "Amiri";
-  src: url("~/static/fonts/Amiri/Amiri-Regular.ttf");
+  font-family: 'Amiri';
+  src: url('~/assets/fonts/Amiri/Amiri-Regular.ttf');
   font-weight: 400;
   font-size: normal;
+  font-display: swap;
 }

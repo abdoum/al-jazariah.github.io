@@ -52,7 +52,7 @@
             ifShow: !this.playback,
             title: 'تشغيل',
             classes: {
-              //   hidden: !this.canPlay,
+              hidden: !this.canPlay,
               'animate-pulse text-red-500 shadow-xl': this.canPlay,
 
               'focus:outline-none focus:text-red-500': true
