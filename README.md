@@ -26,7 +26,7 @@ cd al-jazariah.github.io
 npm i
 ```
 
-4. Start the development server
+3. Start the development server
 ```
 npm run dev
 ```
