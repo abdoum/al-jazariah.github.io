@@ -101,6 +101,12 @@
           const secondPartStartTime =
             this.currentLine.startTime + firstDuration;
           return secondPartStartTime;
+        }else{
+            const firstDuration =
+            (this.nextChapter.startTime - this.currentLine.startTime) / 2;
+          const secondPartStartTime =
+            this.currentLine.startTime + firstDuration;
+          return secondPartStartTime;
         }
       },
       currentChapter() {
